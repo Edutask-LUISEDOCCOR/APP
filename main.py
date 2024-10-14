@@ -1,9 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 from database.config import db, User
 #routes
 from routes.auth import bp as bp_auth
 
 app = Flask(__name__)
+app.secret_key = "secret_key"
+
 app.register_blueprint(bp_auth)
 
 @app.before_request
@@ -17,7 +19,7 @@ def close_database(response):
 
 @app.get("/")
 def index ():
-    return render_template("index.html", name="Luis Eduardo")
+    return render_template("index.html")
 
 @app.errorhandler(404)
 def not_found (error):

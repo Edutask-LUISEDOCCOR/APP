@@ -3,6 +3,20 @@
 <main class="min-h-screen flex justify-center items-center">
     <section class="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-100">{{title}}</h1>
+        {% with messages = get_flashed_messages()  %}
+            {% if messages %}
+                <ul class="mb-4">
+                    {% for message in messages %}
+                        <li 
+                            role="alert" 
+                            class="text-md text-red-500 text-center"
+                        >
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         <form method=post class="space-y-4">
             {% from "macros/_formhelpers.html" import render_field %}
             {% for field in form %}
@@ -14,6 +28,14 @@
             >
                 {{ title }}    
             </button>
+            <div class="mt-4 block text-sm">
+                {% if opposite == "login" %}
+                    <span>You already have an account: </span>
+                {% else %}
+                    <span>You don't have an account yet: </span>
+                {% endif %}
+                <a href="{{ url_for('auth.' + opposite) }}" class="underline">{{ opposite }}</a>
+            </div>
         </form>
         </section>
     </main>
