@@ -19,7 +19,8 @@ def close_database(response):
 
 @app.get("/")
 def index ():
-    return render_template("index.html")
+    users = User.select().count()
+    return render_template("index.html", users=users)
 
 @app.errorhandler(404)
 def not_found (error):

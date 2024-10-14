@@ -1,3 +1,40 @@
 {% extends "template.html" %} 
 {% block children %}
+<div   
+    class="absolute -z-50 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] 
+    bg-[size:24px_24px]"
+>
+</div>
+<div class="mx-auto max-w-5xl">
+    <header class="space-y-2 gap-y-7 h-screen grid place-content-center">
+        <hgroup class="space-y-5">
+            <h1 class="text-5xl font-bold leading-tight">Mantén el control de tus tareas con nuestra poderosa aplicación EduTask</h1>
+            <h2 class="text-2xl">By <a href="https://www.luiseduardocortes.xyz/" class="underline">Luis Eduardo Ocegueda Cortes </a>🇲🇽</h2>
+        </hgroup>
+        <p class="text-lg text-neutral-400">Gestiona tus tareas diarias de manera eficiente, establece recordatorios y realiza un seguimiento de tu progreso. Nuestra interfaz intuitiva hace que la productividad sea pan comido.</p>
+        <section class="flex items-end gap-8">
+            {%if users%}
+            <h3>
+                <span class="block text-center text-3xl font-bold">+{{ users }}</span>
+                <span class="text-md">Usuarios</span>
+            </h3>
+            {% endif %}
+            <a 
+                class="text-xl bg-green-500 text-black h-16 w-64 flex justify-center items-center gap-2 rounded-full hover:opacity-75 transition-opacity" 
+                href="{{ url_for('auth.signup') }}"
+                > 
+                Empiezar a usarla
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    class="h-6 w-6"
+                    viewBox="0 0 24 24">
+                    <path 
+                    fill="currentColor" 
+                    d="m11.93 5l2.83 2.83L5 17.59L6.42 19l9.76-9.75L19 12.07V5z"
+                />
+                </svg>
+            </a>
+        </section>
+    </header>
+</div>
 {% endblock %}
