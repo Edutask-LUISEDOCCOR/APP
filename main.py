@@ -1,8 +1,19 @@
 from flask import Flask, render_template
-from routes.auth import bp as bg_auth
+from database.config import db, User
+#routes
+from routes.auth import bp as bp_auth
 
 app = Flask(__name__)
-app.register_blueprint(bg_auth)
+app.register_blueprint(bp_auth)
+
+@app.before_request
+def init_database():
+     db.connect()
+
+@app.after_request
+def close_database(response):
+    db.close()
+    return response
 
 @app.get("/")
 def index ():
@@ -12,3 +23,6 @@ def index ():
 def not_found (error):
     print(error)
     return render_template("errors/404.html", error=error)
+
+with db:
+    db.create_tables([User])
