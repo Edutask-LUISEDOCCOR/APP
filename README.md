@@ -4,3 +4,7 @@
 - [x] LandigPage 
 - [x] protect the routes
 - [ ] crud de task
+- [ ] crud de task
+- [ ] templates to add and edit a task
+- [ ] Being able to share a task even if you are not logged in
+- [ ] Template to view a single task

@@ -22,28 +22,34 @@
         </header>
         <main class="space-y-3">
             <h2 class="text-lg font-semibold">Your Tasks:</h2>
-            <section class="flex gap-6 flex-warp">
+            <section class="flex gap-6 flex-wrap">
             {% if tasks %}
             {% for task in tasks %}
                 <article 
                     class="bg-neutral-800 flex flex-col 
-                    justify-between w-full px-3 pt-2 gap-3 pb-6 rounded-md"
+                    justify-between w-full max-w-64 px-3 pt-2 gap-3 pb-6 rounded-md"
                 >
-                    <h4 class="text-lg font-semibold">{{ task.title }}</h4>
+                    <h4 class="text-lg font-semibold {% if task.isDone %} line-through	{% endif %}  ">{{ task.title }}</h4>
                     <p class="text-sm">{{ task.content }}</p>
-                    <ul class="text-sm flex justify-between">
+                    <ul class="text-sm flex justify-center gap-4">
                         <li 
                             class="bg-yellow-500 text-yellow-900 
-                            px-3 py-.5 rounded-full"
+                            px-3 py-.5 rounded-full text-md font-bold"
                         >Edit</li>
                         <li 
                             class="bg-red-500 text-red-900 
-                            px-3 py-.5 rounded-full"
+                            px-3 py-.5 rounded-full text-md font-bold"
                         >Remove</li>
                         <li 
-                            class="bg-green-500 text-green-900 
-                            px-3 py-.5 rounded-full"
-                        >Finish</li>
+                            class="{% if task.isDone %} bg-amber-500 text-amber-900 {% else %} bg-green-500 text-green-900 {% endif %}
+                            px-3 py-.5 rounded-full text-md font-bold"
+                        >
+                            {% if task.isDone %} 
+                                Work  
+                            {% else %} 
+                                Finish 
+                            {% endif %}
+                        </li>
                     </ul>
                 </article>
             {% endfor %}
