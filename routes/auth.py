@@ -20,7 +20,7 @@ def login():
         else: 
             flash("The username does not exist")
 
-    return render_template("auth/index.html", opposite="signup", title="Login", form=form)
+    return render_template("pages/auth/index.html", opposite="signup", title="Login", form=form)
 
 @bp.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -38,4 +38,4 @@ def signup():
                 flash("Error creating user")
         else:
             flash("The username already exists")
-    return render_template("auth/index.html", opposite="login", title="Sign Up", form=form)      
+    return render_template("pages/auth/index.html", opposite="login", title="Sign Up", form=form)      

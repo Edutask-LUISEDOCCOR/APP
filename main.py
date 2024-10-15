@@ -25,7 +25,7 @@ def index ():
 @app.errorhandler(404)
 def not_found (error):
     print(error)
-    return render_template("errors/404.html", error=error)
+    return render_template("pages/errors/404.html", error=error)
 
 with db:
     db.create_tables([User])
