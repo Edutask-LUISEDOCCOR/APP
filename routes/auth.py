@@ -46,3 +46,8 @@ def signup():
         else:
             flash("The username already exists")
     return render_template("pages/auth/index.html", opposite="login", title="Sign Up", form=form)      
+
+@bp.get("/logout")
+def logout ():
+    session.clear()
+    return redirect(url_for("index")) 
