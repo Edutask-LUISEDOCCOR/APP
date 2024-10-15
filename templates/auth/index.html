@@ -1,22 +1,13 @@
 {% extends "template.html" %}
 {% block children %}
-<main class="min-h-screen flex justify-center items-center">
+<main class="min-h-screen gap-6 flex-col flex justify-center items-center">
+    <div class="w-96">
+        <a class="text-left" href="{{ url_for('index') }}">Regresar</a>
+    </div>
     <section class="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-100">{{title}}</h1>
-        {% with messages = get_flashed_messages()  %}
-            {% if messages %}
-                <ul class="mb-4">
-                    {% for message in messages %}
-                        <li 
-                            role="alert" 
-                            class="text-md text-red-500 text-center"
-                        >
-                            {{ message }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
+        {% from "macros/_alert.html" import render_alert %}
+        {{ render_alert() }}
         <form method=post class="space-y-4">
             {% from "macros/_formhelpers.html" import render_field %}
             {% for field in form %}
