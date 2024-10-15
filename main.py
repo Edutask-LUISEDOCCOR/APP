@@ -1,12 +1,14 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, jsonify
 from database.config import db, User
 #routes
 from routes.auth import bp as bp_auth
+from routes.task import bp as bp_task
 
 app = Flask(__name__)
 app.secret_key = "secret_key"
 
 app.register_blueprint(bp_auth)
+app.register_blueprint(bp_task)
 
 @app.before_request
 def init_database():
@@ -21,6 +23,10 @@ def close_database(response):
 def index ():
     users = User.select().count()
     return render_template("index.html", users=users)
+
+@app.get("/ok")
+def health_check ():
+    return jsonify({"msg": "ok"})
 
 @app.errorhandler(404)
 def not_found (error):
