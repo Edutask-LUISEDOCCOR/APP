@@ -1,6 +1,6 @@
 # TO DO ✅
-- [*] Signup 
-- [ ] Login
-- [ ] LandigPage 
-- [ ] protect the routes
+- [x] Signup 
+- [x] Login
+- [x] LandigPage 
+- [x] protect the routes
 - [ ] crud de task
