@@ -5,9 +5,26 @@ class TaskModel():
         self.task = Task
 
     def create(self, title, content, user_id):
-        #try:
+        try:
             data = self.task(title=title, content=content, user=user_id)
             data.save()
             return data
-        #except:
+        except:
             return False
+
+    def getById(self, task_id, user_id):
+        try:
+            task = self.task.get(id=task_id, user=user_id)
+            return task
+        except:
+            return False
+
+    def change_status(self, task_id, user_id):
+        try:
+            task = self.getById(task_id, user_id)
+            if(not task): 
+                return 
+            data = self.task.update(isDone=(not task.isDone)).where(task_id == task_id)
+            data.execute()
+        except:
+            return

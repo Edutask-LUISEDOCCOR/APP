@@ -22,6 +22,11 @@ def delete(task_id):
 def update(task_id):
     pass
 
+@bp.get("/change/status/<int:task_id>")
+def change_status(task_id):
+    task_model.change_status(task_id=task_id, user_id=session["user_id"])
+    return redirect(url_for("task.index"))
+
 @bp.route("/create", methods=["GET", "POST"])
 def create():
     form = TaskForm(request.form)

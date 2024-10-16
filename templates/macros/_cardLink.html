@@ -1,0 +1,5 @@
+{% macro render_cardLink(label, href, class, task_id=None) %}
+<li class="{{ class }} px-3 py-.5 rounded-full text-md font-bold">
+    <a href="{{ url_for(href, task_id=task_id) }}">{{ label }}</a>
+</li>
+{% endmacro %}

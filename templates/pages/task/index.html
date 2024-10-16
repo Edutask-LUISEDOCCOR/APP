@@ -10,20 +10,17 @@
                 justify-between w-full max-w-64 px-3 pt-2 gap-3 pb-6 rounded-md"
             >
                 <h4 class="text-lg font-semibold {% if task.isDone %} line-through	{% endif %}  ">{{ task.title }}</h4>
-                <p class="text-sm">{{ task.content }}</p>
+                <div class="flex h-full items-start">
+                    <p class="text-sm">{{ task.content }}</p>
+                </div>
                 <ul class="text-sm flex justify-center gap-4">
-                    <li class="bg-yellow-500 text-yellow-900 px-3 py-.5 rounded-full text-md font-bold">Edit</li>
-                    <li class="bg-red-500 text-red-900 px-3 py-.5 rounded-full text-md font-bold">Remove</li>
-                    <li class="
-                        {% if task.isDone %} bg-amber-500 text-amber-900 {% else %} bg-green-500 text-green-900 {% endif %}
-                        px-3 py-.5 rounded-full text-md font-bold"
-                    >
-                        {% if task.isDone %} 
-                            Work  
-                        {% else %} 
-                            Finish 
-                        {% endif %}
-                    </li>
+                    {% from "macros/_cardLink.html" import render_cardLink %}
+                    {{ render_cardLink(href="index", label="Edit", class="text-yellow-900 bg-yellow-500") }}
+                    {{ render_cardLink(href="index", label="Remove", class="text-red-900 bg-red-500") }}
+                    {% set label = "Work" if task.isDone else "Finish" %}
+                    {% set class = "bg-amber-500 text-amber-900" if task.isDone else "bg-green-500 text-green-900" %}
+                    {{ render_cardLink(href="task.change_status", label=label, class=class, task_id=task.id) 
+                    }}
                 </ul>
             </article>
         {% endfor %}
