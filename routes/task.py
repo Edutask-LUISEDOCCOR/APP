@@ -20,15 +20,27 @@ def delete(task_id):
     task_model.delete(task_id=task_id, user_id=session["user_id"])
     return redirect(url_for("task.index"))
 
-@bp.get("/update/<int:task_id>")
+@bp.route("/update/<int:task_id>", methods=["GET", "POST"])
 @requires_login
 def update(task_id):
-    pass
+    form = TaskForm(request.form)
+    if(request.method == "POST" and form.validate()):
+        if(not task_model.update(user_id=session["user_id"], task_id=task_id, title=form.title.data, content=form.content.data)):
+            flash("Error updating task")
+        return redirect(url_for("task.index"))    
+    task = task_model.getById(task_id=task_id, user_id=session["user_id"])
+    if(not task):
+        flash("Error finding task")
+        return redirect(url_for("task.index"))
+    form.title.data = task.title
+    form.content.data = task.content
+    return render_template("pages/task/form.html", form=form, username=session["username"], title="Update a Task") 
 
 @bp.get("/change/status/<int:task_id>")
 @requires_login
 def change_status(task_id):
-    task_model.change_status(task_id=task_id, user_id=session["user_id"])
+    if(not task_model.change_status(task_id=task_id, user_id=session["user_id"])):
+        flash("Error changing task status")    
     return redirect(url_for("task.index"))
 
 @bp.route("/create", methods=["GET", "POST"])
