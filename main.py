@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-from database.config import db, User
+from database.config import db, User, Task
 #routes
 from routes.auth import bp as bp_auth
 from routes.task import bp as bp_task
@@ -34,4 +34,4 @@ def not_found (error):
     return render_template("pages/errors/404.html", error=error)
 
 with db:
-    db.create_tables([User])
+    db.create_tables([User, Task])

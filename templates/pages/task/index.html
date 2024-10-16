@@ -1,66 +1,41 @@
-{% extends "layouts/layout.html" %}
-{% block children %}
-    <div class="h-screen z-10 w-32 bg-neutral-800 absolute top-0 pt-6 pb-12">
-        <nav class="px-4 flex flex-col justify-between h-full">
-            <h3 class="text-md">
-                <span class="block">Hi! </span> 
-                <span class="block underline underline-offset-4">{{ username }}</span>
-            </h3>
-            <ul class="space-y-3">
-                {% from "macros/_navLinks.html"
-                    import render_navLinkExit, render_navLinkHome, render_navLinkCreate  
-                %}
-                {{ render_navLinkHome(href="index") }}
-                {{ render_navLinkCreate(href="index") }}
-                {{ render_navLinkExit(href="auth.logout") }}
-            </ul>
-        </nav>
-    </div>
-    <div class="absolute space-y-4 min-h-screen w-full pl-44 pr-12 pt-6">
-        <header>
-            <h1 class="text-2xl font-bold">Edutask</h1>
-        </header>
-        <main class="space-y-3">
-            <h2 class="text-lg font-semibold">Your Tasks:</h2>
-            <section class="flex gap-6 flex-wrap">
-            {% if tasks %}
-            {% for task in tasks %}
-                <article 
-                    class="bg-neutral-800 flex flex-col 
-                    justify-between w-full max-w-64 px-3 pt-2 gap-3 pb-6 rounded-md"
-                >
-                    <h4 class="text-lg font-semibold {% if task.isDone %} line-through	{% endif %}  ">{{ task.title }}</h4>
-                    <p class="text-sm">{{ task.content }}</p>
-                    <ul class="text-sm flex justify-center gap-4">
-                        <li 
-                            class="bg-yellow-500 text-yellow-900 
-                            px-3 py-.5 rounded-full text-md font-bold"
-                        >Edit</li>
-                        <li 
-                            class="bg-red-500 text-red-900 
-                            px-3 py-.5 rounded-full text-md font-bold"
-                        >Remove</li>
-                        <li 
-                            class="{% if task.isDone %} bg-amber-500 text-amber-900 {% else %} bg-green-500 text-green-900 {% endif %}
-                            px-3 py-.5 rounded-full text-md font-bold"
-                        >
-                            {% if task.isDone %} 
-                                Work  
-                            {% else %} 
-                                Finish 
-                            {% endif %}
-                        </li>
-                    </ul>
-                </article>
-            {% endfor %}
-            {% else %}
-                <span 
-                class="text-sm underline"
-                >
-                    You have no tasks at the moment
-                </span>
-            {% endif %}
-            </section>    
+{% extends "layouts/taskLayout.html" %}
+{% block content %}
+    <main class="space-y-3">
+        <h2 class="text-lg font-semibold">Your Tasks:</h2>
+        <section class="flex gap-6 flex-wrap">
+        {% if tasks %}
+        {% for task in tasks %}
+            <article 
+                class="bg-neutral-800 flex flex-col 
+                justify-between w-full max-w-64 px-3 pt-2 gap-3 pb-6 rounded-md"
+            >
+                <h4 class="text-lg font-semibold {% if task.isDone %} line-through	{% endif %}  ">{{ task.title }}</h4>
+                <p class="text-sm">{{ task.content }}</p>
+                <ul class="text-sm flex justify-center gap-4">
+                    <li class="bg-yellow-500 text-yellow-900 px-3 py-.5 rounded-full text-md font-bold">Edit</li>
+                    <li class="bg-red-500 text-red-900 px-3 py-.5 rounded-full text-md font-bold">Remove</li>
+                    <li class="
+                        {% if task.isDone %} bg-amber-500 text-amber-900 {% else %} bg-green-500 text-green-900 {% endif %}
+                        px-3 py-.5 rounded-full text-md font-bold"
+                    >
+                        {% if task.isDone %} 
+                            Work  
+                        {% else %} 
+                            Finish 
+                        {% endif %}
+                    </li>
+                </ul>
+            </article>
+        {% endfor %}
+        {% else %}
+            <span 
+            class="text-sm flex gap-3"
+            >
+                You have no tasks at the moment:
+                {% from "macros/_navLinks.html" import render_navLinkCreate %}
+                {{ render_navLinkCreate(href="task.create") }}
+            </span>
+        {% endif %}
+        </section>    
         </main>
-    </div>
-{% endblock children %}
+{% endblock content %}

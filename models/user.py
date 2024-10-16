@@ -1,10 +1,9 @@
-from typing import Type
 from database.config import User
 from peewee import DoesNotExist
 from lib.bcrypt import hash_password
 
 class UserModel():
-    def __init__(self, User: Type[User]) -> None:
+    def __init__(self) -> None:
         self.user = User
 
     def getByUsername(self, username):
@@ -22,13 +21,14 @@ class UserModel():
             return False
     
     def create(self, username, password):
-        #try:
+        try:
             hashPassword = hash_password(password)
             data = self.user(username=username, password=hashPassword)
             data.save()
             return data
-        #except :
+        except :
             return False
+    
 
 
 

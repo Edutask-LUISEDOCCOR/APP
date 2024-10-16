@@ -1,13 +1,12 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from forms.auth import AuthForm
-from models.users import UserModel
-from database.config import User
+from models.user import UserModel
 from lib.bcrypt import verify_password
 from decorators.auth import no_requires_login
 
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
-usermodel = UserModel(User)
+usermodel = UserModel()
 
 @bp.route("/login", methods=["GET", "POST"])
 @no_requires_login
