@@ -24,7 +24,18 @@ class TaskModel():
             task = self.getById(task_id, user_id)
             if(not task): 
                 return 
-            data = self.task.update(isDone=(not task.isDone)).where(task_id == task_id)
-            data.execute()
+            query = self.task.update(isDone=(not task.isDone)).where(self.task.id == task_id)
+            query.execute()
+            print(query)
+        except:
+            return
+    
+    def delete(self, task_id, user_id):
+        try:
+            task = self.getById(task_id, user_id)
+            if(not task): 
+                return 
+            query = self.task.delete().where(self.task.id == task_id)
+            query.execute()
         except:
             return

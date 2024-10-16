@@ -16,7 +16,7 @@
                 <ul class="text-sm flex justify-center gap-4">
                     {% from "macros/_cardLink.html" import render_cardLink %}
                     {{ render_cardLink(href="index", label="Edit", class="text-yellow-900 bg-yellow-500") }}
-                    {{ render_cardLink(href="index", label="Remove", class="text-red-900 bg-red-500") }}
+                    {{ render_cardLink(href="task.delete", label="Remove", class="text-red-900 bg-red-500", task_id=task.id) }}
                     {% set label = "Work" if task.isDone else "Finish" %}
                     {% set class = "bg-amber-500 text-amber-900" if task.isDone else "bg-green-500 text-green-900" %}
                     {{ render_cardLink(href="task.change_status", label=label, class=class, task_id=task.id) 

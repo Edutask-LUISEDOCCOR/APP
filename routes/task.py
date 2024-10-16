@@ -15,19 +15,24 @@ def index ():
     return render_template("pages/task/index.html", username=session["username"], tasks=tasks)
 
 @bp.get("/delelte/<int:task_id>")
+@requires_login
 def delete(task_id):
-    pass
+    task_model.delete(task_id=task_id, user_id=session["user_id"])
+    return redirect(url_for("task.index"))
 
 @bp.get("/update/<int:task_id>")
+@requires_login
 def update(task_id):
     pass
 
 @bp.get("/change/status/<int:task_id>")
+@requires_login
 def change_status(task_id):
     task_model.change_status(task_id=task_id, user_id=session["user_id"])
     return redirect(url_for("task.index"))
 
 @bp.route("/create", methods=["GET", "POST"])
+@requires_login
 def create():
     form = TaskForm(request.form)
     if(request.method == "POST" and form.validate() ):
