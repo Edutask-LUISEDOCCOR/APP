@@ -2,7 +2,7 @@ from peewee import SqliteDatabase, PostgresqlDatabase, Model, AutoField, CharFie
 from dotenv import load_dotenv
 import os 
 
-load_dotenv()
+load_dotenv(".env.local")
 
 if(os.getenv("environment") == "production"):
     DB_NAME = os.getenv('DB_NAME')

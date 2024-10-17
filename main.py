@@ -1,11 +1,16 @@
 from flask import Flask, render_template, jsonify
+from dotenv import load_dotenv
+import os
+#database
 from database.config import db, User, Task
 #routes
 from routes.auth import bp as bp_auth
 from routes.task import bp as bp_task
 
+load_dotenv(".env.local")
+
 app = Flask(__name__)
-app.secret_key = "secret_key"
+app.secret_key = os.getenv("APP_KEY")
 
 app.register_blueprint(bp_auth)
 app.register_blueprint(bp_task)
@@ -30,7 +35,6 @@ def health_check ():
 
 @app.errorhandler(404)
 def not_found (error):
-    print(error)
     return render_template("pages/errors/404.html", error=error)
 
 with db:
