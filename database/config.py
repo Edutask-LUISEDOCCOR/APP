@@ -4,7 +4,7 @@ import os
 
 load_dotenv()
 
-if(os.getenv("environment") == "environment"):
+if(os.getenv("environment") == "production"):
     DB_NAME = os.getenv('DB_NAME')
     USER = os.getenv('DB_USER')
     PASSWORD = os.getenv('DB_PASSWORD')
