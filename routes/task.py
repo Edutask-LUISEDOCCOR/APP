@@ -14,7 +14,7 @@ def index ():
     tasks =  user_model.getById(session["user_id"]).tasks
     return render_template("pages/task/index.html", username=session["username"], tasks=tasks)
 
-@bp.get("/delelte/<int:task_id>")
+@bp.get("/delete/<int:task_id>")
 @requires_login
 def delete(task_id):
     task_model.delete(task_id=task_id, user_id=session["user_id"])
