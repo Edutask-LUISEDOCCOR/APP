@@ -5,5 +5,6 @@
 - [x] protect the routes
 - [x] crud de task
 - [x] templates to add and edit a task
+- [x] add responsive
 - [ ] Being able to share a task even if you are not logged in
 - [ ] Template to view a single task

@@ -2,14 +2,14 @@
 {% block children %}
 {% from 'macros/_bg.html' import render_bg  %}
 {{ render_bg() }}
-<div class="mx-auto max-w-5xl">
-    <header class="space-y-2 gap-y-7 h-screen grid place-content-center">
+<div class="mx-auto max-w-5xl px-6 xl:px-0">
+    <header class="h-screen grid place-content-center gap-y-5 xl:gap-y-7">
         <hgroup class="space-y-5">
-            <h1 class="text-5xl font-bold leading-tight">Mantén el control de tus tareas con nuestra poderosa aplicación EduTask</h1>
-            <h2 class="text-2xl">By <a href="https://www.luiseduardocortes.xyz/" class="underline">Luis Eduardo Ocegueda Cortes </a>🇲🇽</h2>
+            <h1 class="font-bold leading-tight text-4xl xl:text-5xl">Mantén el control de tus tareas con nuestra poderosa aplicación EduTask</h1>
+            <h2 class="text-xl xl:text-2xl">By <a href="https://www.luiseduardocortes.xyz/" class="underline">Luis Eduardo Ocegueda Cortes </a>🇲🇽</h2>
         </hgroup>
         <p class="text-lg text-neutral-400">Gestiona tus tareas diarias de manera eficiente, establece recordatorios y realiza un seguimiento de tu progreso. Nuestra interfaz intuitiva hace que la productividad sea pan comido.</p>
-        <section class="flex items-end gap-8">
+        <section class="flex items-end gap-8 justify-center xl:justify-start">
             {%if users%}
             <h3>
                 <span class="block text-center text-3xl font-bold">+{{ users }}</span>
