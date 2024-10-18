@@ -1,10 +1,10 @@
 {% extends "layouts/layout.html" %}
 {% block children %}
-<main class="min-h-screen gap-6 flex-col flex justify-center items-center">
-    <div class="w-96">
+<main class="min-h-screen gap-6 flex-col flex justify-center items-center px-6 xl:px-0">
+    <div class="w-full lg:w-96">
         <a class="text-left" href="{{ url_for('index') }}">Back</a>
     </div>
-    <section class="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
+    <section class="bg-gray-800 p-8 rounded-lg shadow-lg w-full lg:w-96">
         <h1 class="text-2xl font-bold mb-6 text-center text-gray-100">{{title}}</h1>
         {% from "macros/_alert.html" import render_alert %}
         {{ render_alert() }}
